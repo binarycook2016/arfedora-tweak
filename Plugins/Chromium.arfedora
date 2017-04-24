@@ -1,2 +1,2 @@
 arfedora:
-     "Chromium" : ["Install Chromium", ["dnf install Chromium"] , ["/usr/bin/chromium"],"all","root",["fedora"]]
+     "Chromium" : ["Install Chromium", ["dnf install chromium"] , ["/usr/bin/chromium"],"all","root",["fedora"]]
