@@ -1,2 +1,2 @@
 arfedora:
-     "Firefox" : ["Install Firefox", ["dnf install firefox"] , ["/usr/bin/firefox"],"all","root",["fedora"],"Install Firefox."]
+     "Firefox" : ["Install Firefox", ["dnf install firefox"] , ["/usr/bin/firefox"],"all","root",["fedora"]]
