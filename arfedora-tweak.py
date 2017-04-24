@@ -33,7 +33,7 @@ import time
 
 def init_check():
 	if not sys.version.startswith("3"):
-		sys.exit("Use Python 3 Try run python3 ar-make-cfedora.py")
+		sys.exit("Use Python 3 Try run python3 arfedora-tweak.py")
 init_check()
 
 def get_distro_name():
@@ -134,7 +134,7 @@ def y_o_n(m):
 def main(msg=""):
 	while True:
 		subprocess.call("clear")
-		print ("Choice Tasks || q To Quit || r To Reload Plugins.\n")
+		print ("Choice Task || q To Quit || r To Reload Plugins.\n")
 		for number in range(len(finally_programs.items())):
 			print ( "{}-{} {}.\n".format(str(number+1),finally_programs[str(number+1)][0].title(),finally_programs[str(number+1)][2]) )
 			
@@ -163,6 +163,6 @@ def main(msg=""):
 					main("\nTask ( {} ) Sucess.".format(program[0]))
 					
 			else:
-				return main("\nNothing TO Do.\n".format(program[0]))
+				return main("\nNothing To Do.\n".format(program[0]))
 if __name__ == "__main__":
 	main()
