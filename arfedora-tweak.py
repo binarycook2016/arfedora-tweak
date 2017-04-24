@@ -107,14 +107,17 @@ def f_p():
 			count+=1
 f_p()
 
-def reload_():
+def reload_(msg=""):
 	global programs
 	global finally_programs
 	programs.clear()
 	finally_programs.clear()
 	read_all_plugins()
 	f_p()
-	return main()
+	if len(msg) == 0:
+		return main()
+	else:
+		return main(msg)
 	
 def y_o_n(m):
 	while True:
@@ -152,15 +155,14 @@ def main(msg=""):
 		elif answer in finally_programs.keys():
 			program = finally_programs[answer]
 			if program[2] != "(Installed)":
+				y_o_n(program[0])
 				for command in program[1]:
-					print (program[0])
-					y_o_n(program[0])
 					check = subprocess.call(command,shell=True)
 					if check != 0:
 						return main("\nTask ( {} ) Fail.".format(program[0]))
 					time.sleep(1)
 				if check == 0:
-					main("\nTask ( {} ) Sucess.".format(program[0]))
+					return reload_("\nTask ( {} ) Sucess.".format(program[0]))
 					
 			else:
 				return main("\nNothing To Do.\n".format(program[0]))
