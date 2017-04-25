@@ -1,2 +1,2 @@
 arfedora:
-     "Firefox" : ["Install Firefox + Flash Player", ["rpm -ivh http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm","rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux","dnf install firefox flash-plugin -y --best"] , ["/usr/bin/firefox","/usr/bin/flash-player-properties"],"32bit","root",["fedora"]]
+     "Firefox" : ["Install Firefox + Flash Player", ["dnf install -y --best http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm","rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-adobe-linux","dnf install firefox flash-plugin -y --best"] , ["/usr/bin/firefox","/usr/bin/flash-player-properties"],"32bit","root",["fedora"]]
