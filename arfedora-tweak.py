@@ -1,30 +1,5 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-#
-#  arfedora-tweak.py
-#  
-#  Copyright 2017 yucef sourani <youssef.m.sourani@gmail.com>
-#
-#  www.arfedora.blogspot.com
-#
-#  www.arfedora.com
-#  
-#  This program is free software; you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation; either version 2 of the License, or
-#  (at your option) any later version.
-#  
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#  
-#  You should have received a copy of the GNU General Public License
-#  along with this program; if not, write to the Free Software
-#  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-#  MA 02110-1301, USA.
-#  
-#  
 import subprocess
 import sys
 import os
@@ -33,7 +8,7 @@ import time
 
 def init_check():
 	if not sys.version.startswith("3"):
-		sys.exit("Use Python 3 Try run python3 arfedora-tweak.py")
+		sys.exit("Use Python 3 Try run python3 %s"%__file__)
 init_check()
 
 def get_distro_name():
@@ -83,8 +58,8 @@ def to_check(files):
 def read_all_plugins():
 	for f in os.listdir(plugins_location):
 		plugin_location = plugins_location+"/{}".format(f)
-		if f.endswith(".arfedora") and os.path.isfile(plugin_location):
-			plugin = yaml.load(open(plugin_location))['arfedora']
+		if f.endswith(".Plugins") and os.path.isfile(plugin_location):
+			plugin = yaml.load(open(plugin_location))['plugins']
 			programs.update(plugin)
 read_all_plugins()	
 
@@ -102,9 +77,23 @@ def f_p():
 		if "all" in v[5]:
 			v[5]=[distro_name]
 			
-		if v[3] == arch and v[4] == user_id and distro_name in v[5]:
-			finally_programs[str(count)]=[v[0] , v[1] , to_check(v[2])]
-			count+=1
+		if v[3]=="32bitonly" :
+			if arch!="64bit" and v[4] == user_id and distro_name in v[5]:
+				finally_programs[str(count)]=[v[0] , v[1] , to_check(v[2])]
+				count+=1
+				
+		else:
+			if arch=="64bit":
+				if v[4] == user_id and distro_name in v[5]:
+					finally_programs[str(count)]=[v[0] , v[1] , to_check(v[2])]
+					count+=1
+					
+	
+			else:
+				if v[3] == arch and v[4] == user_id and distro_name in v[5]:
+					finally_programs[str(count)]=[v[0] , v[1] , to_check(v[2])]
+					count+=1
+					
 f_p()
 
 def reload_(msg=""):
