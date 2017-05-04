@@ -242,7 +242,7 @@ def installed(button,window):
 	
 	
 def install(button,data):
-	command = ""
+	command = "set -e\n"
 	for c in data[0]:
 		command+=repr(r"""{}""".format(c))[1:-1]+"\n"
 	with open(file_to_run,"w") as myfile:
@@ -301,7 +301,7 @@ def main_gui(reset=False):
 		vbox.pack_start(hbox,True,True,0)
 		label1=Gtk.Label(v[0])
 		hbox.pack_start(label1,True,True,25)
-		if v[2]==_("Installed"):
+		if v[2]==_("Installe"):
 			button=Gtk.Button(label=_("Installed"))
 			button.set_border_width(2)
 			button.connect("clicked",installed,w)
