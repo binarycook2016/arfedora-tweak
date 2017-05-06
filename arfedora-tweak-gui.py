@@ -316,7 +316,7 @@ def main_gui(reset=False):
 		vbox.pack_start(hbox,True,True,0)
 		label1=Gtk.Label(v[0])
 		hbox.pack_start(label1,True,True,25)
-		if v[2]==_("Installe"):
+		if v[2]==_("Installed"):
 			button=Gtk.Button(label=_("Installed"))
 			button.set_border_width(2)
 			button.connect("clicked",installed,w)
