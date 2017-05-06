@@ -135,6 +135,7 @@ class WWait(threading.Thread):
 			self.p.set_fraction(0.0)
 			self.p.hide()
 			self.status.value=2
+			return False
 		else:
 			self.p.pulse()
 			return True
@@ -229,9 +230,11 @@ class CT(threading.Thread):
 		if check == 0:
 			self.button.set_label(_("Installed"))
 			self.status_label.set_text(_("Status : Task ( {} ) Sucess.".format(self.task)))
+			self.status.value = 3
 		else:
 			self.status_label.set_text(_("Status : Task ( {} ) Fail.".format(self.task)))
-		self.status.value = 3
+			self.status.value = 4
+		
 
 		
 		
@@ -240,6 +243,14 @@ def installed(button,window):
 	return NInfo(_("Nothing To Do"),window)
 	
 	
+def check_if_done(window):
+	if status.value == 3:
+		NInfo("Done",window)
+		return False
+	elif status.value == 4:
+		NInfo("Fail",window)
+		return False
+	return True
 	
 def install(button,data):
 	command = "set -e\n"
@@ -254,6 +265,8 @@ def install(button,data):
 	t2 = WWait(msg="",status=status,title="",speed=50,parent=data[1],box=data[2])
 	t1.start()
 	t2.start()
+	
+	GLib.idle_add(check_if_done,data[1])
 
 
 def about_(button,parent):
@@ -301,7 +314,7 @@ def main_gui(reset=False):
 		vbox.pack_start(hbox,True,True,0)
 		label1=Gtk.Label(v[0])
 		hbox.pack_start(label1,True,True,25)
-		if v[2]==_("Installed"):
+		if v[2]==_("Installe"):
 			button=Gtk.Button(label=_("Installed"))
 			button.set_border_width(2)
 			button.connect("clicked",installed,w)
